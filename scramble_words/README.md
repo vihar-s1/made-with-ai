@@ -31,4 +31,9 @@ Grok 3 -- Free Version
 
 2. 
 
-    
+    Lets improve the UI.
+    1.  Improve the Rules box by centre aligning "Rules" and using numeric bullets
+    2. support to submit word by pressing enter key
+    3. increase the list size and impove the randomization in letters. The set of letters generated are not always useful.
+    4. allow option to shuffle letters (restart game)
+    5. show a small alert in red if the word was wrong and in green if the word was right
