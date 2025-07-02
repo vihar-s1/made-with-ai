@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Scramble Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-4 text-center">Word Scramble Game</h1>
+        
+        <!-- Rules Box -->
+        <div class="bg-blue-100 p-4 rounded mb-4">
+            <h2 class="text-lg font-semibold mb-2">Rules</h2>
+            <ul class="list-disc pl-5 text-sm">
+                <li>You are given 7 random letters from the English alphabet.</li>
+                <li>Form words using these letters; each letter can be used only once per word.</li>
+                <li>Each valid word scores points equal to its length.</li>
+                <li>Enter words in the input box and submit to check if they are valid.</li>
+                <li>The game ends when you choose to terminate it by clicking 'End Game'.</li>
+                <li>Valid words are displayed below with their scores.</li>
+            </ul>
+        </div>
+
+        <!-- Letters Display -->
+        <div class="mb-4">
+            <h3 class="text-lg font-semibold">Your Letters:</h3>
+            <div id="letters" class="text-2xl font-mono text-center"></div>
+        </div>
+
+        <!-- Input and Buttons -->
+        <div class="flex mb-4">
+            <input id="wordInput" type="text" class="border rounded p-2 flex-grow mr-2" placeholder="Enter a word">
+            <button id="submitBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Submit</button>
+        </div>
+        <button id="endBtn" class="bg-red-500 text-white px-4 py-2 rounded w-full hover:bg-red-600">End Game</button>
+
+        <!-- Valid Words and Score -->
+        <div id="validWords" class="mt-4">
+            <h3 class="text-lg font-semibold">Valid Words:</h3>
+            <ul id="wordList" class="list-disc pl-5"></ul>
+            <p class="mt-2">Total Score: <span id="totalScore">0</span></p>
+        </div>
+
+        <!-- Game Over Message -->
+        <div id="gameOver" class="hidden mt-4 text-center">
+            <h3 class="text-lg font-semibold text-red-600">Game Over!</h3>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <button id="restartBtn" class="bg-green-500 text-white px-4 py-2 rounded mt-2 hover:bg-green-600">Restart Game</button>
+        </div>
+    </div>
+
+    <script>
+        // Predefined word list for validation (simplified for demo)
+        const wordList = ['cat', 'act', 'hat', 'the', 'tea', 'eat', 'ate', 'heat', 'that', 'chat', 'each', 'ache', 'cake', 'take', 'make'];
+
+        // Game state
+        let letters = [];
+        let validWords = [];
+        let totalScore = 0;
+
+        // DOM elements
+        const lettersDiv = document.getElementById('letters');
+        const wordInput = document.getElementById('wordInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const endBtn = document.getElementById('endBtn');
+        const wordListUl = document.getElementById('wordList');
+        const totalScoreSpan = document.getElementById('totalScore');
+        const gameOverDiv = document.getElementById('gameOver');
+        const finalScoreSpan = document.getElementById('finalScore');
+        const restartBtn = document.getElementById('restartBtn');
+
+        // Generate 7 random letters
+        function generateLetters() {
+            const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+            letters = [];
+            for (let i = 0; i < 7; i++) {
+                const randomIndex = Math.floor(Math.random() * alphabet.length);
+                letters.push(alphabet[randomIndex]);
+            }
+            lettersDiv.textContent = letters.join(' ');
+        }
+
+        // Validate word
+        function isValidWord(word) {
+            // Check if word is in the word list
+            if (!wordList.includes(word.toLowerCase())) {
+                return false;
+            }
+            // Check if word can be formed with given letters
+            const letterCount = {};
+            for (let letter of letters) {
+                letterCount[letter] = (letterCount[letter] || 0) + 1;
+            }
+            for (let char of word.toLowerCase()) {
+                if (!letterCount[char] || letterCount[char] === 0) {
+                    return false;
+                }
+                letterCount[char]--;
+            }
+            return true;
+        }
+
+        // Update valid words display
+        function updateWordList() {
+            wordListUl.innerHTML = '';
+            validWords.forEach(word => {
+                const li = document.createElement('li');
+                li.textContent = `${word} (Score: ${word.length})`;
+                wordListUl.appendChild(li);
+            });
+            totalScoreSpan.textContent = totalScore;
+        }
+
+        // Handle word submission
+        submitBtn.addEventListener('click', () => {
+            const word = wordInput.value.trim().toLowerCase();
+            if (word && isValidWord(word) && !validWords.includes(word)) {
+                validWords.push(word);
+                totalScore += word.length;
+                updateWordList();
+                wordInput.value = '';
+                wordInput.focus();
+            } else {
+                alert('Invalid word! Ensure it uses only the given letters, is a valid word, and hasn’t been used yet.');
+                wordInput.value = '';
+                wordInput.focus();
+            }
+        });
+
+        // Handle end game
+        endBtn.addEventListener('click', () => {
+            submitBtn.disabled = true;
+            wordInput.disabled = true;
+            endBtn.classList.add('hidden');
+            finalScoreSpan.textContent = totalScore;
+            gameOverDiv.classList.remove('hidden');
+        });
+
+        // Handle restart game
+        restartBtn.addEventListener('click', () => {
+            letters = [];
+            validWords = [];
+            totalScore = 0;
+            generateLetters();
+            updateWordList();
+            wordInput.value = '';
+            wordInput.disabled = false;
+            submitBtn.disabled = false;
+            endBtn.classList.remove('hidden');
+            gameOverDiv.classList.add('hidden');
+            wordInput.focus();
+        });
+
+        // Initialize game
+        generateLetters();
+        wordInput.focus();
+    </script>
+</body>
+</html>
