@@ -11,6 +11,10 @@
 
 ## Prompt Iteration
 
+### Conversional AI
+
+Grok 3 -- Free Version 
+
 1. 
 
     Create a scramble words game.
