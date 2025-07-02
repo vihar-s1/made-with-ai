@@ -5,63 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word Scramble Game</title>
     <style>
-        /* Minimal Tailwind CSS output */
-        .bg-gray-100 { background-color: #f3f4f6; }
+        /* Tailwind CSS output (minimized for used classes) */
+        .bg-gray-900 { background-color: #111827; }
+        .bg-gray-800 { background-color: #1f2937; }
+        .bg-gray-700 { background-color: #374151; }
+        .bg-blue-600 { background-color: #2563eb; }
+        .bg-blue-500 { background-color: #3b82f6; }
+        .bg-blue-50 { background-color: #eff6ff; }
+        .bg-yellow-500 { background-color: #eab308; }
+        .bg-red-500 { background-color: #ef4444; }
+        .bg-green-500 { background-color: #22c55e; }
+        .bg-red-200 { background-color: #fecaca; }
+        .bg-green-200 { background-color: #bbf7d0; }
+        .text-white { color: #ffffff; }
+        .text-gray-300 { color: #d1d5db; }
+        .text-gray-400 { color: #9ca3af; }
+        .text-gray-900 { color: #1f2937; }
+        .text-red-600 { color: #dc2626; }
+        .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+        .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+        .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+        .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+        .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+        .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
         .flex { display: flex; }
+        .flex-col { flex-direction: column; }
         .justify-center { justify-content: center; }
         .items-center { align-items: center; }
         .min-h-screen { min-height: 100vh; }
-        .bg-white { background-color: #ffffff; }
-        .p-6 { padding: 1.5rem; }
-        .rounded-lg { border-radius: 0.5rem; }
-        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
         .w-full { width: 100%; }
-        .max-w-md { max-width: 28rem; }
-        .text-2xl { font-size: 1.5rem; line-height: 2rem; }
-        .font-bold { font-weight: 700; }
-        .mb-4 { margin-bottom: 1rem; }
-        .text-center { text-align: center; }
-        .bg-blue-100 { background-color: #dbeafe; }
+        .max-w-lg { max-width: 32rem; }
+        .p-6 { padding: 1.5rem; }
         .p-4 { padding: 1rem; }
-        .rounded { border-radius: 0.25rem; }
-        .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
-        .font-semibold { font-weight: 600; }
-        .mb-2 { margin-bottom: 0.5rem; }
-        .list-decimal { list-style-type: decimal; }
-        .pl-5 { padding-left: 1.25rem; }
-        .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
-        .text-2xl { font-size: 1.5rem; line-height: 2rem; }
-        .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-        .border { border-width: 1px; }
         .p-2 { padding: 0.5rem; }
-        .flex-grow { flex-grow: 1; }
-        .mr-2 { margin-right: 0.5rem; }
-        .bg-blue-500 { background-color: #3b82f6; }
-        .text-white { color: #ffffff; }
         .px-4 { padding-left: 1rem; padding-right: 1rem; }
         .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
-        .hover\:bg-blue-600:hover { background-color: #2563eb; }
-        .bg-yellow-500 { background-color: #eab308; }
-        .hover\:bg-yellow-600:hover { background-color: #ca8a04; }
-        .bg-red-500 { background-color: #ef4444; }
-        .hover\:bg-red-600:hover { background-color: #dc2626; }
-        .bg-green-500 { background-color: #22c55e; }
-        .hover\:bg-green-600:hover { background-color: #16a34a; }
-        .bg-red-200 { background-color: #fecaca; }
-        .bg-green-200 { background-color: #bbf7d0; }
-        .text-red-600 { color: #dc2626; }
-        .list-disc { list-style-type: disc; }
+        .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-2 { margin-top: 0.5rem; }
+        .mr-2 { margin-right: 0.5rem; }
+        .rounded-lg { border-radius: 0.5rem; }
+        .rounded { border-radius: 0.25rem; }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+        .border { border-width: 1px; }
+        .border-gray-600 { border-color: #4b5563; }
+        .flex-grow { flex-grow: 1; }
+        .space-x-2 > :not(:last-child) { margin-right: 0.5rem; }
+        .list-decimal { list-style-type: decimal; }
+        .pl-5 { padding-left: 1.25rem; }
+        .grid { display: grid; }
+        .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .gap-2 { gap: 0.5rem; }
+        .text-center { text-align: center; }
         .hidden { display: none; }
+        .hover\:bg-blue-600:hover { background-color: #2563eb; }
+        .hover\:bg-yellow-600:hover { background-color: #ca8a04; }
+        .hover\:bg-red-600:hover { background-color: #dc2626; }
+        .hover\:bg-green-600:hover { background-color: #16a34a; }
     </style>
 </head>
-<body class="bg-gray-100 flex justify-center items-center min-h-screen">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h1 class="text-2xl font-bold mb-4 text-center">Word Scramble Game</h1>
+<body class="bg-gray-900 flex justify-center items-center min-h-screen">
+    <div class="bg-gray-800 text-gray-300 p-6 rounded-lg shadow-lg w-full max-w-lg">
+        <h1 class="text-3xl font-bold mb-4 text-center text-white">Word Scramble Game</h1>
         
         <!-- Rules Box -->
-        <div class="bg-blue-100 p-4 rounded mb-4">
-            <h2 class="text-lg font-semibold mb-2 text-center">Rules</h2>
-            <ol class="list-decimal pl-5 text-sm">
+        <div class="bg-blue-50 p-4 rounded-lg mb-4 shadow-md">
+            <h2 class="text-xl font-semibold mb-2 text-center text-gray-900">Rules</h2>
+            <ol class="list-decimal pl-5 text-sm text-gray-900">
                 <li>You are given 7 random letters from the English alphabet.</li>
                 <li>Form words using these letters; each letter can be used only once per word.</li>
                 <li>Each valid word scores points equal to its length.</li>
@@ -74,188 +88,191 @@
 
         <!-- Letters Display -->
         <div class="mb-4">
-            <h3 class="text-lg font-semibold">Your Letters:</h3>
-            <div id="letters" class="text-2xl font-mono text-center"></div>
+            <h3 class="text-lg font-semibold text-white">Your Letters:</h3>
+            <div id="letters" class="text-xl font-mono text-center bg-gray-700 p-2 rounded text-white"></div>
         </div>
 
         <!-- Input and Buttons -->
-        <div class="flex mb-4">
-            <input id="wordInput" type="text" class="border rounded p-2 flex-grow mr-2" placeholder="Enter a word">
+        <div class="flex mb-4 space-x-2">
+            <input id="wordInput" type="text" class="border border-gray-600 rounded p-2 flex-grow bg-gray-700 text-white placeholder-gray-400" placeholder="Enter a word">
             <button id="submitBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Submit</button>
         </div>
-        <div class="flex mb-4">
-            <button id="shuffleBtn" class="bg-yellow-500 text-white px-4 py-2 rounded mr-2 w-full hover:bg-yellow-600">Shuffle Letters</button>
-            <button id="endBtn" class="bg-red-500 text-white px-4 py-2 rounded w-full hover:bg-red-600">End Game</button>
+        <div class="flex mb-4 space-x-2">
+            <button id="shuffleBtn" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Shuffle Letters</button>
+            <button id="endBtn" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">End Game</button>
         </div>
 
         <!-- Alert Message -->
-        <div id="alert" class="hidden text-center p-2 rounded mb-4"></div>
+        <div id="alert" class="hidden text-center p-2 rounded mb-4 text-sm text-gray-900"></div>
 
         <!-- Valid Words and Score -->
         <div id="validWords" class="mt-4">
-            <h3 class="text-lg font-semibold">Valid Words:</h3>
-            <ul id="wordList" class="list-disc pl-5"></ul>
-            <p class="mt-2">Total Score: <span id="totalScore">0</span></p>
+            <h3 class="text-lg font-semibold text-white">Valid Words:</h3>
+            <div id="wordList" class="grid grid-cols-2 gap-2 mt-2"></div>
+            <p class="mt-4 text-white">Total Score: <span id="totalScore">0</span></p>
         </div>
 
         <!-- Game Over Message -->
         <div id="gameOver" class="hidden mt-4 text-center">
-            <h3 class="text-lg font-semibold text-red-600">Game Over!</h3>
-            <p>Final Score: <span id="finalScore">0</span></p>
+            <h3 class="text-xl font-semibold text-red-600">Game Over!</h3>
+            <p class="text-white">Final Score: <span id="finalScore">0</span></p>
             <button id="restartBtn" class="bg-green-500 text-white px-4 py-2 rounded mt-2 hover:bg-green-600">Restart Game</button>
         </div>
     </div>
 
     <script>
-        // Expanded word list for validation
-        const wordList = [
-            'cat', 'act', 'hat', 'the', 'tea', 'eat', 'ate', 'heat', 'that', 'chat',
-            'each', 'ache', 'cake', 'take', 'make', 'lake', 'fake', 'bake', 'sake',
-            'rate', 'date', 'gate', 'fate', 'mate', 'late', 'tale', 'sale', 'male',
-            'time', 'lime', 'dime', 'mime', 'rime', 'fine', 'line', 'mine', 'nine',
-            'pine', 'vine', 'wine', 'dine', 'ring', 'sing', 'wing', 'king', 'ping',
-            'song', 'long', 'gong', 'tong', 'rung', 'lung', 'sung', 'hung'
-        ];
+        document.addEventListener('DOMContentLoaded', () => {
+            // Expanded word list for validation
+            const wordList = [
+                'cat', 'act', 'hat', 'the', 'tea', 'eat', 'ate', 'heat', 'that', 'chat',
+                'each', 'ache', 'cake', 'take', 'make', 'lake', 'fake', 'bake', 'sake',
+                'rate', 'date', 'gate', 'fate', 'mate', 'late', 'tale', 'sale', 'male',
+                'time', 'lime', 'dime', 'mime', 'rime', 'fine', 'line', 'mine', 'nine',
+                'pine', 'vine', 'wine', 'dine', 'ring', 'sing', 'wing', 'king', 'ping',
+                'song', 'long', 'gong', 'tong', 'rung', 'lung', 'sung', 'hung'
+            ];
 
-        // Game state
-        let letters = [];
-        let validWords = [];
-        let totalScore = 0;
+            // Game state
+            let letters = [];
+            let validWords = [];
+            let totalScore = 0;
 
-        // DOM elements
-        const lettersDiv = document.getElementById('letters');
-        const wordInput = document.getElementById('wordInput');
-        const submitBtn = document.getElementById('submitBtn');
-        const shuffleBtn = document.getElementById('shuffleBtn');
-        const endBtn = document.getElementById('endBtn');
-        const wordListUl = document.getElementById('wordList');
-        const totalScoreSpan = document.getElementById('totalScore');
-        const gameOverDiv = document.getElementById('gameOver');
-        const finalScoreSpan = document.getElementById('finalScore');
-        const restartBtn = document.getElementById('restartBtn');
-        const alertDiv = document.getElementById('alert');
+            // DOM elements
+            const lettersDiv = document.getElementById('letters');
+            const wordInput = document.getElementById('wordInput');
+            const submitBtn = document.getElementById('submitBtn');
+            const shuffleBtn = document.getElementById('shuffleBtn');
+            const endBtn = document.getElementById('endBtn');
+            const wordListDiv = document.getElementById('wordList');
+            const totalScoreSpan = document.getElementById('totalScore');
+            const gameOverDiv = document.getElementById('gameOver');
+            const finalScoreSpan = document.getElementById('finalScore');
+            const restartBtn = document.getElementById('restartBtn');
+            const alertDiv = document.getElementById('alert');
 
-        // Generate 7 random letters with at least 2 vowels and 5 consonants
-        function generateLetters() {
-            const vowels = 'aeiou';
-            const consonants = 'bcdfghjklmnpqrstvwxyz';
-            letters = [];
-            // Ensure at least 2 vowels
-            for (let i = 0; i < 2; i++) {
-                const randomIndex = Math.floor(Math.random() * vowels.length);
-                letters.push(vowels[randomIndex]);
+            // Generate 7 random letters with at least 2 vowels and 5 consonants
+            function generateLetters() {
+                const vowels = 'aeiou';
+                const consonants = 'bcdfghjklmnpqrstvwxyz';
+                letters = [];
+                // Ensure at least 2 vowels
+                for (let i = 0; i < 2; i++) {
+                    const randomIndex = Math.floor(Math.random() * vowels.length);
+                    letters.push(vowels[randomIndex]);
+                }
+                // Fill the rest with consonants
+                for (let i = 0; i < 5; i++) {
+                    const randomIndex = Math.floor(Math.random() * consonants.length);
+                    letters.push(consonants[randomIndex]);
+                }
+                // Shuffle the letters
+                letters.sort(() => Math.random() - 0.5);
+                lettersDiv.textContent = letters.join(' ');
             }
-            // Fill the rest with consonants
-            for (let i = 0; i < 5; i++) {
-                const randomIndex = Math.floor(Math.random() * consonants.length);
-                letters.push(consonants[randomIndex]);
-            }
-            // Shuffle the letters
-            letters.sort(() => Math.random() - 0.5);
-            lettersDiv.textContent = letters.join(' ');
-        }
 
-        // Validate word
-        function isValidWord(word) {
-            if (!wordList.includes(word.toLowerCase())) {
-                return false;
-            }
-            const letterCount = {};
-            for (let letter of letters) {
-                letterCount[letter] = (letterCount[letter] || 0) + 1;
-            }
-            for (let char of word.toLowerCase()) {
-                if (!letterCount[char] || letterCount[char] === 0) {
+            // Validate word
+            function isValidWord(word) {
+                if (!wordList.includes(word.toLowerCase())) {
                     return false;
                 }
-                letterCount[char]--;
+                const letterCount = {};
+                for (let letter of letters) {
+                    letterCount[letter] = (letterCount[letter] || 0) + 1;
+                }
+                for (let char of word.toLowerCase()) {
+                    if (!letterCount[char] || letterCount[char] === 0) {
+                        return false;
+                    }
+                    letterCount[char]--;
+                }
+                return true;
             }
-            return true;
-        }
 
-        // Show alert
-        function showAlert(message, isSuccess) {
-            alertDiv.textContent = message;
-            alertDiv.classList.remove('hidden', 'bg-red-200', 'bg-green-200');
-            alertDiv.classList.add(isSuccess ? 'bg-green-200' : 'bg-red-200');
-            setTimeout(() => {
-                alertDiv.classList.add('hidden');
-            }, 2000);
-        }
+            // Show alert
+            function showAlert(message, isSuccess) {
+                alertDiv.textContent = message;
+                alertDiv.classList.remove('hidden', 'bg-red-200', 'bg-green-200');
+                alertDiv.classList.add(isSuccess ? 'bg-green-200' : 'bg-red-200');
+                setTimeout(() => {
+                    alertDiv.classList.add('hidden');
+                }, 2000);
+            }
 
-        // Update valid words display
-        function updateWordList() {
-            wordListUl.innerHTML = '';
-            validWords.forEach(word => {
-                const li = document.createElement('li');
-                li.textContent = `${word} (Score: ${word.length})`;
-                wordListUl.appendChild(li);
+            // Update valid words display
+            function updateWordList() {
+                wordListDiv.innerHTML = '';
+                validWords.forEach(word => {
+                    const wordDiv = document.createElement('div');
+                    wordDiv.className = 'bg-gray-700 p-2 rounded text-sm text-white';
+                    wordDiv.textContent = `${word} (${word.length})`;
+                    wordListDiv.appendChild(wordDiv);
+                });
+                totalScoreSpan.textContent = totalScore;
+            }
+
+            // Handle word submission
+            function submitWord() {
+                const word = wordInput.value.trim().toLowerCase();
+                if (word && isValidWord(word) && !validWords.includes(word)) {
+                    validWords.push(word);
+                    totalScore += word.length;
+                    updateWordList();
+                    showAlert('Valid word!', true);
+                    wordInput.value = '';
+                    wordInput.focus();
+                } else {
+                    showAlert('Invalid word! Ensure it uses only the given letters, is a valid word, and hasn’t been used yet.', false);
+                    wordInput.value = '';
+                    wordInput.focus();
+                }
+            }
+
+            // Handle Enter key
+            wordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    submitWord();
+                }
             });
-            totalScoreSpan.textContent = totalScore;
-        }
 
-        // Handle word submission
-        function submitWord() {
-            const word = wordInput.value.trim().toLowerCase();
-            if (word && isValidWord(word) && !validWords.includes(word)) {
-                validWords.push(word);
-                totalScore += word.length;
+            // Handle submit button
+            submitBtn.addEventListener('click', submitWord);
+
+            // Handle shuffle letters
+            shuffleBtn.addEventListener('click', () => {
+                generateLetters();
+                wordInput.focus();
+            });
+
+            // Handle end game
+            endBtn.addEventListener('click', () => {
+                submitBtn.disabled = true;
+                wordInput.disabled = true;
+                shuffleBtn.disabled = true;
+                endBtn.classList.add('hidden');
+                finalScoreSpan.textContent = totalScore;
+                gameOverDiv.classList.remove('hidden');
+            });
+
+            // Handle restart game
+            restartBtn.addEventListener('click', () => {
+                letters = [];
+                validWords = [];
+                totalScore = 0;
+                generateLetters();
                 updateWordList();
-                showAlert('Valid word!', true);
                 wordInput.value = '';
+                wordInput.disabled = false;
+                submitBtn.disabled = false;
+                shuffleBtn.disabled = false;
+                endBtn.classList.remove('hidden');
+                gameOverDiv.classList.add('hidden');
                 wordInput.focus();
-            } else {
-                showAlert('Invalid word! Ensure it uses only the given letters, is a valid word, and hasn’t been used yet.', false);
-                wordInput.value = '';
-                wordInput.focus();
-            }
-        }
+            });
 
-        // Handle Enter key
-        wordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                submitWord();
-            }
-        });
-
-        // Handle submit button
-        submitBtn.addEventListener('click', submitWord);
-
-        // Handle shuffle letters
-        shuffleBtn.addEventListener('click', () => {
+            // Initialize game
             generateLetters();
             wordInput.focus();
         });
-
-        // Handle end game
-        endBtn.addEventListener('click', () => {
-            submitBtn.disabled = true;
-            wordInput.disabled = true;
-            shuffleBtn.disabled = true;
-            endBtn.classList.add('hidden');
-            finalScoreSpan.textContent = totalScore;
-            gameOverDiv.classList.remove('hidden');
-        });
-
-        // Handle restart game
-        restartBtn.addEventListener('click', () => {
-            letters = [];
-            validWords = [];
-            totalScore = 0;
-            generateLetters();
-            updateWordList();
-            wordInput.value = '';
-            wordInput.disabled = false;
-            submitBtn.disabled = false;
-            shuffleBtn.disabled = false;
-            endBtn.classList.remove('hidden');
-            gameOverDiv.classList.add('hidden');
-            wordInput.focus();
-        });
-
-        // Initialize game
-        generateLetters();
-        wordInput.focus();
     </script>
 </body>
 </html>

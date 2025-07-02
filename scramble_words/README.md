@@ -37,3 +37,14 @@ Grok 3 -- Free Version
     3. increase the list size and impove the randomization in letters. The set of letters generated are not always useful.
     4. allow option to shuffle letters (restart game)
     5. show a small alert in red if the word was wrong and in green if the word was right
+
+
+3. 
+
+    1. Give the UI a more modern look
+    2. Improve the valid words listing to more structured an compact format
+
+4.
+
+    1. update the background color, font color for rules since they are both very similar in shade.
+    2. update the font color for alert messages as well since they are not visible in the current alert background
