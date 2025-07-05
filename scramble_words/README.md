@@ -15,6 +15,8 @@
 
 Grok 3 -- Free Version 
 
+### HTML Prompt Iteration
+
 1. 
 
     Create a scramble words game.
@@ -52,3 +54,15 @@ Grok 3 -- Free Version
 5.
 
     can I instead have an API call integration ??
+
+### Python Prompt Iteration
+
+1.
+
+    Now lets code the same game in python. Points to keep in mind, 
+
+    1. keep the API key as a static constant variable.
+    2. use class based approach to handle the logic.
+    3. use __main__ block to execute the CLI version of the game
+    4. implement a GUI as well in a separate file that has an instance of the class
+
