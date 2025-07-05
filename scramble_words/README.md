@@ -48,3 +48,7 @@ Grok 3 -- Free Version
 
     1. update the background color, font color for rules since they are both very similar in shade.
     2. update the font color for alert messages as well since they are not visible in the current alert background
+
+5.
+
+    can I instead have an API call integration ??
