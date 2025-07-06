@@ -34,3 +34,13 @@ Grok 3 -- Free Version
     7. The list of successful submissions is displayed at the bottom of the screen.
     8. The player can also choose to reset the game to start over.
     9. The rules are displayed at the top of the screen in a rule box.
+
+2. 
+
+    1. Improve the game UI to a more modern, smooth look.
+    2. The tiles in the grid should not shuffle every time a word is submitted.
+    3. Unique submitted words should be there.
+    4. Show the Game ended page when all possible words are covered.
+    5. Create a toggle on top to change themes.
+    6. Move the Reset Game button to the top.
+

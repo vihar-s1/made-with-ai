@@ -4,103 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merge Words</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-        }
-        #game-container {
-            text-align: center;
-        }
-        #rules {
-            background-color: #e0e0e0;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            max-width: 400px;
-        }
-        #grid {
-            display: grid;
-            grid-template-columns: repeat(3, 100px);
-            gap: 5px;
-            margin-bottom: 20px;
-        }
         .tile {
-            width: 100px;
-            height: 100px;
+            transition: all 0.2s ease-in-out;
+        }
+        .tile:hover {
+            transform: scale(1.05);
+        }
+        .theme-dark {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+        .theme-dark .tile {
+            background-color: #374151;
+            border-color: #4b5563;
+        }
+        .theme-dark .tile.selected {
+            background-color: #10b981;
+        }
+        .theme-dark #rules, .theme-dark #word-list {
+            background-color: #374151;
+        }
+        .theme-light {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        .theme-light .tile {
             background-color: #ffffff;
-            border: 2px solid #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            user-select: none;
+            border-color: #6b7280;
         }
-        .tile.selected {
-            background-color: #aaffaa;
+        .theme-light .tile.selected {
+            background-color: #6ee7b7;
         }
-        #current-word {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        #score {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-        #word-list {
-            margin-top: 20px;
-            max-width: 400px;
-        }
-        #word-list ul {
-            list-style: none;
-            padding: 0;
-        }
-        #word-list li {
-            background-color: #e0e0e0;
-            padding: 5px;
-            margin: 2px 0;
-            border-radius: 3px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin: 5px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #45a049;
+        .theme-light #rules, .theme-light #word-list {
+            background-color: #e5e7eb;
         }
     </style>
 </head>
-<body>
-    <div id="game-container">
-        <div id="rules">
-            <h2>Merge Words Rules</h2>
-            <p>1. Select tiles in sequence to form a word.</p>
-            <p>2. Submit to check if it's a valid word.</p>
-            <p>3. Score points equal to the word's length.</p>
-            <p>4. Game ends when no more words can be formed.</p>
-            <p>5. Shuffle tiles or reset the game anytime.</p>
+<body class="theme-light min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-300">
+    <div id="game-container" class="max-w-md w-full">
+        <div class="flex justify-between items-center mb-4">
+            <button onclick="resetGame()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-200">Reset Game</button>
+            <button onclick="toggleTheme()" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded transition duration-200">Toggle Theme</button>
         </div>
-        <div id="score">Score: 0</div>
-        <div id="current-word">Current Word: </div>
-        <div id="grid"></div>
-        <button onclick="submitWord()">Submit Word</button>
-        <button onclick="shuffleTiles()">Shuffle Tiles</button>
-        <button onclick="resetGame()">Reset Game</button>
-        <div id="word-list">
-            <h3>Found Words</h3>
-            <ul id="found-words"></ul>
+        <div id="rules" class="p-4 mb-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-2">Merge Words Rules</h2>
+            <p class="text-sm">1. Select tiles in sequence to form a word.</p>
+            <p class="text-sm">2. Submit to check if it's a valid word.</p>
+            <p class="text-sm">3. Score points equal to the word's length.</p>
+            <p class="text-sm">4. Game ends when no more words can be formed.</p>
+            <p class="text-sm">5. Shuffle tiles or reset the game anytime.</p>
+        </div>
+        <div id="score" class="text-lg font-semibold mb-4">Score: 0</div>
+        <div id="current-word" class="text-2xl mb-4">Current Word: </div>
+        <div id="grid" class="grid grid-cols-3 gap-2 mb-6"></div>
+        <div class="flex justify-center gap-4 mb-6">
+            <button onclick="submitWord()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-200">Submit Word</button>
+            <button onclick="shuffleTiles()" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px David.4 rounded transition duration-200">Shuffle Tiles</button>
+        </div>
+        <div id="word-list" class="p-4 rounded-lg shadow-md">
+            <h3 class="text-lg font-bold mb-2">Found Words</h3>
+            <ul id="found-words" class="text-sm"></ul>
+        </div>
+        <div id="game-over" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                <h2 class="text-2xl font-bold mb-4">Game Over!</h2>
+                <p class="text-lg mb-4">Final Score: <span id="final-score"></span></p>
+                <button onclick="resetGame()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-200">Play Again</button>
+            </div>
         </div>
     </div>
     <script>
@@ -109,6 +81,7 @@
         let selectedTiles = [];
         let score = 0;
         let foundWords = [];
+        let isDarkTheme = false;
 
         function initializeGame() {
             tiles = generateTiles();
@@ -119,10 +92,10 @@
             updateCurrentWord();
             updateWordList();
             renderGrid();
+            document.getElementById('game-over').classList.add('hidden');
         }
 
         function generateTiles() {
-            const letters = ['t', 'h', 'e', 'c', 'a', 't', 'd', 'o', 'g'];
             const tileOptions = [
                 ['t', 'h', 'e'], ['c', 'a'], ['t'], ['d', 'o'], ['g'],
                 ['h', 'a'], ['t', 'e'], ['c', 'a', 't'], ['d', 'o', 'g']
@@ -136,7 +109,7 @@
             grid.innerHTML = '';
             tiles.forEach((tile, index) => {
                 const tileDiv = document.createElement('div');
-                tileDiv.className = 'tile';
+                tileDiv.className = 'tile w-20 h-20 bg-white border-2 border-gray-500 flex items-center justify-center text-xl font-semibold rounded-md shadow-sm';
                 tileDiv.textContent = tile.join('');
                 tileDiv.onclick = () => selectTile(index);
                 if (selectedTiles.includes(index)) {
@@ -161,6 +134,7 @@
 
         function updateScore() {
             document.getElementById('score').textContent = `Score: ${score}`;
+            document.getElementById('final-score').textContent = score;
         }
 
         function updateWordList() {
@@ -169,19 +143,20 @@
             foundWords.forEach(word => {
                 const li = document.createElement('li');
                 li.textContent = word;
+                li.className = 'p-2 mb-1 rounded bg-gray-200';
                 list.appendChild(li);
             });
         }
 
         function submitWord() {
             const word = selectedTiles.map(i => tiles[i].join('')).join('');
-            if (dictionary.includes(word.toLowerCase())) {
+            if (word.length === 0) {
+                alert('Please select at least one tile!');
+                return;
+            }
+            if (dictionary.includes(word.toLowerCase()) && !foundWords.includes(word)) {
                 score += word.length;
                 foundWords.push(word);
-                tiles = tiles.filter((_, i) => !selectedTiles.includes(i));
-                while (tiles.length < 9) {
-                    tiles.push(generateTiles()[0]);
-                }
                 selectedTiles = [];
                 updateScore();
                 updateWordList();
@@ -189,7 +164,7 @@
                 updateCurrentWord();
                 checkGameOver();
             } else {
-                alert('Invalid word!');
+                alert(foundWords.includes(word) ? 'Word already used!' : 'Invalid word!');
                 selectedTiles = [];
                 renderGrid();
                 updateCurrentWord();
@@ -208,17 +183,14 @@
         }
 
         function checkGameOver() {
-            // Simplified game over check: if no valid words can be formed
             const possibleWords = generatePossibleWords();
             if (possibleWords.length === 0) {
-                alert(`Game Over! Final Score: ${score}`);
-                resetGame();
+                document.getElementById('game-over').classList.remove('hidden');
             }
         }
 
         function generatePossibleWords() {
             const words = [];
-            // Check all possible tile combinations
             for (let i = 1; i <= tiles.length; i++) {
                 const combinations = getCombinations(tiles, i);
                 combinations.forEach(combo => {
@@ -246,6 +218,12 @@
             }
             combine([], 0, k);
             return results;
+        }
+
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            document.body.className = isDarkTheme ? 'theme-dark min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-300' : 'theme-light min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-300';
+            renderGrid();
         }
 
         initializeGame();
