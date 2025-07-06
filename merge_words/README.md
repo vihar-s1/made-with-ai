@@ -44,3 +44,11 @@ Grok 3 -- Free Version
     5. Create a toggle on top to change themes.
     6. Move the Reset Game button to the top.
 
+3.
+
+1. Improve the grid layout and remove spacing between tiles.  Give the tiles a slightly rectangular shape.
+2. Improve the "Submit Word" and "Shuffle Tiles" button UI.
+3. Improve the dark theme, light theme and iron out some bugs.
+4. Add sound effects for each button click, but not grid tiles.
+5. Create a backspace button to clear the last tile selection.
+6. The Enter button submits, and the backspace button clears
