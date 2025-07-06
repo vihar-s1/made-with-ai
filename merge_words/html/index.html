@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merge Words</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        #game-container {
+            text-align: center;
+        }
+        #rules {
+            background-color: #e0e0e0;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            max-width: 400px;
+        }
+        #grid {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+        .tile {
+            width: 100px;
+            height: 100px;
+            background-color: #ffffff;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .tile.selected {
+            background-color: #aaffaa;
+        }
+        #current-word {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        #score {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        #word-list {
+            margin-top: 20px;
+            max-width: 400px;
+        }
+        #word-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        #word-list li {
+            background-color: #e0e0e0;
+            padding: 5px;
+            margin: 2px 0;
+            border-radius: 3px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="rules">
+            <h2>Merge Words Rules</h2>
+            <p>1. Select tiles in sequence to form a word.</p>
+            <p>2. Submit to check if it's a valid word.</p>
+            <p>3. Score points equal to the word's length.</p>
+            <p>4. Game ends when no more words can be formed.</p>
+            <p>5. Shuffle tiles or reset the game anytime.</p>
+        </div>
+        <div id="score">Score: 0</div>
+        <div id="current-word">Current Word: </div>
+        <div id="grid"></div>
+        <button onclick="submitWord()">Submit Word</button>
+        <button onclick="shuffleTiles()">Shuffle Tiles</button>
+        <button onclick="resetGame()">Reset Game</button>
+        <div id="word-list">
+            <h3>Found Words</h3>
+            <ul id="found-words"></ul>
+        </div>
+    </div>
+    <script>
+        const dictionary = ["the", "cat", "dog", "hat", "rat", "bat", "mat", "sat", "fat", "pat", "tat", "eat", "tea", "ate", "eta"];
+        let tiles = [];
+        let selectedTiles = [];
+        let score = 0;
+        let foundWords = [];
+
+        function initializeGame() {
+            tiles = generateTiles();
+            selectedTiles = [];
+            score = 0;
+            foundWords = [];
+            updateScore();
+            updateCurrentWord();
+            updateWordList();
+            renderGrid();
+        }
+
+        function generateTiles() {
+            const letters = ['t', 'h', 'e', 'c', 'a', 't', 'd', 'o', 'g'];
+            const tileOptions = [
+                ['t', 'h', 'e'], ['c', 'a'], ['t'], ['d', 'o'], ['g'],
+                ['h', 'a'], ['t', 'e'], ['c', 'a', 't'], ['d', 'o', 'g']
+            ];
+            const shuffled = tileOptions.sort(() => Math.random() - 0.5);
+            return shuffled.slice(0, 9);
+        }
+
+        function renderGrid() {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+            tiles.forEach((tile, index) => {
+                const tileDiv = document.createElement('div');
+                tileDiv.className = 'tile';
+                tileDiv.textContent = tile.join('');
+                tileDiv.onclick = () => selectTile(index);
+                if (selectedTiles.includes(index)) {
+                    tileDiv.className += ' selected';
+                }
+                grid.appendChild(tileDiv);
+            });
+        }
+
+        function selectTile(index) {
+            if (!selectedTiles.includes(index)) {
+                selectedTiles.push(index);
+                updateCurrentWord();
+                renderGrid();
+            }
+        }
+
+        function updateCurrentWord() {
+            const word = selectedTiles.map(i => tiles[i].join('')).join('');
+            document.getElementById('current-word').textContent = `Current Word: ${word}`;
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = `Score: ${score}`;
+        }
+
+        function updateWordList() {
+            const list = document.getElementById('found-words');
+            list.innerHTML = '';
+            foundWords.forEach(word => {
+                const li = document.createElement('li');
+                li.textContent = word;
+                list.appendChild(li);
+            });
+        }
+
+        function submitWord() {
+            const word = selectedTiles.map(i => tiles[i].join('')).join('');
+            if (dictionary.includes(word.toLowerCase())) {
+                score += word.length;
+                foundWords.push(word);
+                tiles = tiles.filter((_, i) => !selectedTiles.includes(i));
+                while (tiles.length < 9) {
+                    tiles.push(generateTiles()[0]);
+                }
+                selectedTiles = [];
+                updateScore();
+                updateWordList();
+                renderGrid();
+                updateCurrentWord();
+                checkGameOver();
+            } else {
+                alert('Invalid word!');
+                selectedTiles = [];
+                renderGrid();
+                updateCurrentWord();
+            }
+        }
+
+        function shuffleTiles() {
+            tiles = generateTiles();
+            selectedTiles = [];
+            renderGrid();
+            updateCurrentWord();
+        }
+
+        function resetGame() {
+            initializeGame();
+        }
+
+        function checkGameOver() {
+            // Simplified game over check: if no valid words can be formed
+            const possibleWords = generatePossibleWords();
+            if (possibleWords.length === 0) {
+                alert(`Game Over! Final Score: ${score}`);
+                resetGame();
+            }
+        }
+
+        function generatePossibleWords() {
+            const words = [];
+            // Check all possible tile combinations
+            for (let i = 1; i <= tiles.length; i++) {
+                const combinations = getCombinations(tiles, i);
+                combinations.forEach(combo => {
+                    const word = combo.map(tile => tile.join('')).join('');
+                    if (dictionary.includes(word.toLowerCase()) && !foundWords.includes(word)) {
+                        words.push(word);
+                    }
+                });
+            }
+            return words;
+        }
+
+        function getCombinations(arr, k) {
+            const results = [];
+            function combine(curr, start, k) {
+                if (curr.length === k) {
+                    results.push([...curr]);
+                    return;
+                }
+                for (let i = start; i < arr.length; i++) {
+                    curr.push(arr[i]);
+                    combine(curr, i + 1, k);
+                    curr.pop();
+                }
+            }
+            combine([], 0, k);
+            return results;
+        }
+
+        initializeGame();
+    </script>
+</body>
+</html>
