@@ -63,3 +63,15 @@ Grok 3 -- Free Version
     2. merge_words.py will contain a class to handle the game logistics.
     3. cli.py should use the game class to implement a CLI version of the game.
     4. gui.py should use the game class to implement a GUI version of the game.
+
+
+### Java Prompt Iteration
+
+1.
+
+    Now let's generate the same version of the game in java.
+
+    1. I want a 3-file structure for the game.
+    2. merge_words.java will contain a class to handle the game logistics.
+    3. cli.java should use the game class to implement a CLI version of the game.
+    4. gui.java should use the game class to implement a GUI version of the game.
