@@ -46,9 +46,20 @@ Grok 3 -- Free Version
 
 3.
 
-1. Improve the grid layout and remove spacing between tiles.  Give the tiles a slightly rectangular shape.
-2. Improve the "Submit Word" and "Shuffle Tiles" button UI.
-3. Improve the dark theme, light theme and iron out some bugs.
-4. Add sound effects for each button click, but not grid tiles.
-5. Create a backspace button to clear the last tile selection.
-6. The Enter button submits, and the backspace button clears
+    1. Improve the grid layout and remove spacing between tiles.  Give the tiles a slightly rectangular shape.
+    2. Improve the "Submit Word" and "Shuffle Tiles" button UI.
+    3. Improve the dark theme, light theme and iron out some bugs.
+    4. Add sound effects for each button click, but not grid tiles.
+    5. Create a backspace button to clear the last tile selection.
+    6. The Enter button submits, and the backspace button clears
+
+### Python Prompt Iteration
+
+1.
+
+    Now lets generate the same version of the game in python.
+
+    1. I want a 3 files structure for the game.
+    2. merge_words.py will contain a class to handle the game logistics.
+    3. cli.py should use the game class to implement a CLI version of the game.
+    4. gui.py should use the game class to implement a GUI version of the game.
